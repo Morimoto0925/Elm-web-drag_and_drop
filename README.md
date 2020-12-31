@@ -3,7 +3,7 @@ Elm(プログラミング言語)を使ったwebブラウザ上でのドラッグ
 
 **Case**文でそれぞれ別々に処理し、**model.drag**と書くことで**Move**の場合の処理でも使えるようになっている
 
-```
+```javascript
 module Main exposing(..)
 import Browser
 import Html exposing (..)
@@ -83,7 +83,7 @@ offsetを使っても、ドラッグした際にほんの少しだけ図形が�
 
 ## とりあえず完成
 
-```
+```javascript
 module Main exposing(..)
 import Browser
 import Html exposing (..)
@@ -152,7 +152,6 @@ onMouseOffset : (Int -> Int -> msg) -> Html.Attribute msg
 onMouseOffset f = --offset座標を返す
   on "mousemove" (map2 f (field "offsetX" int) (field "offsetY" int))
 ```
-:::
 
 [[Ellieで動かす]](https://ellie-app.com/bPNvvrw5HtWa1)
 
