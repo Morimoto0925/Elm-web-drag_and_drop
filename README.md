@@ -94,7 +94,7 @@ The Elm Architectureより
 >Update — メッセージを使って状態を更新する方法
 
 ### update
-```
+```javascript
 update : Msg -> Model -> Model
 update msg model =
   case msg of
@@ -166,7 +166,7 @@ heightを%指定で参照すると、背景の親要素を作っていない為�
 なので、赤い四角からカーソルが離れると動作しなくなる
 
 ### onMouseあれこれ
-```
+```javascript
 onMouseMove : (Int -> Int -> msg) -> Html.Attribute msg
 onMouseMove f = --client座標を返す
   on "mousemove" (map2 f (field "clientX" int) (field "clientY" int))
