@@ -88,7 +88,9 @@ onMouseOffset f = --offset座標を返す
 ### main
 The Elm Architectureより
 >Model — アプリケーションの状態
+
 >View — 状態を HTML に変換する方法
+
 >Update — メッセージを使って状態を更新する方法
 
 ### update
