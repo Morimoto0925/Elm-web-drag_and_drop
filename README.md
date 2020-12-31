@@ -94,6 +94,21 @@ The Elm Architectureより
 >Update — メッセージを使って状態を更新する方法
 
 ### update
+```
+update : Msg -> Model -> Model
+update msg model =
+  case msg of
+    Down -> {model | drag = True}--マウスダウンを受け取ったらdragフラグをTrueに
+    Up -> {model | drag = False}--マウスアップを受け取ったらdragフラグをFalseに
+    Move x y ->
+      if model.drag then --ドラッグ中ならoffset座標を元に表示する場所を変える
+          {model | x = x - model.x_offset, y = y - model.y_offset}
+      else model --ドラッグ中ではないなら座標を維持する
+    Offset x y ->
+      if (model.drag==False) then 
+          {model | x_offset = x+6, y_offset = y+6}--ドラッグ時に少しだけずれてしまうので微調整(+6)
+      else model
+```
 viewから渡されたメッセージに対応した処理を行う
 **Offset**では、図形の描画点からマウスまでの相対距離(図形内のどこをクリックしたか)を保存しておく
 これによって、図形の端を掴んだまま移動させたり、中央を掴んだまま移動させることが出来る
@@ -151,4 +166,14 @@ heightを%指定で参照すると、背景の親要素を作っていない為�
 なので、赤い四角からカーソルが離れると動作しなくなる
 
 ### onMouseあれこれ
+```
+onMouseMove : (Int -> Int -> msg) -> Html.Attribute msg
+onMouseMove f = --client座標を返す
+  on "mousemove" (map2 f (field "clientX" int) (field "clientY" int))
+ 
+onMouseOffset : (Int -> Int -> msg) -> Html.Attribute msg
+onMouseOffset f = --offset座標を返す
+  on "mousemove" (map2 f (field "offsetX" int) (field "offsetY" int))
+```
+
 マウスのclient座標かoffset座標を返す関数(関数を作らずにdiv内に直接書くこともできる)
