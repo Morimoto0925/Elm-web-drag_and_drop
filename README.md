@@ -1,18 +1,9 @@
 # Elm-web-drag_and_drop
-Elm(プログラミング言語)を使ったwebブラウザ上でのドラッグ&amp;ドロップについて
-
-# 【Elm】webブラウザでマウスをつかって図形を動かせるようにする 第5回 12/17【Windows10】
-[[前回]](https://hackmd.io/@morimoto117/HyXee_AsP)
-
-## 前回の続き
-・ドラッグ中かどうか判定するフラグ名がわかりづらかったので、m→dragに変更
-・四角形の大きさや親要素の範囲を修正
-・マウスボタンが押された時に動いてDownメッセージを送信する**onMouseDown**を追加
-・マウスボタンが離された時に動いてUpメッセージを送信する**onMouseUp**を追加
+Elm(プログラミング言語)を使ったwebブラウザ上でのドラッグ&ドロップについて
 
 **Case**文でそれぞれ別々に処理し、**model.drag**と書くことで**Move**の場合の処理でも使えるようになっている
-:::spoiler コード
-```javascript=
+
+```
 module Main exposing(..)
 import Browser
 import Html exposing (..)
@@ -71,7 +62,7 @@ onMouseMove : (Int -> Int -> msg) -> Html.Attribute msg
 onMouseMove f = --client座標を返す
   on "mousemove" (map2 f (field "clientX" int) (field "clientY" int))
 ```
-:::
+
 [[Ellieで動かす]](https://ellie-app.com/bPW5YTrRhvMa1)
 
 このコードでは、四角形の中でクリックした時のみ図形が動き、常に図形の中心にカーソルが来るように動作する
@@ -92,8 +83,7 @@ offsetを使っても、ドラッグした際にほんの少しだけ図形が�
 
 ## とりあえず完成
 
-:::spoiler コード
-```javascript=
+```
 module Main exposing(..)
 import Browser
 import Html exposing (..)
@@ -197,7 +187,7 @@ heightを%指定で参照すると、背景の親要素を作っていない為�
 なので、図形からカーソルが離れたとたんに動かなくなってしまう
 
 修正箇所
-```javascript=39
+```javascript
   --親要素
   div[ style "position" "relative"
     , style "background" ""
